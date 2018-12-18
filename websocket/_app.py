@@ -170,6 +170,7 @@ class WebSocketApp(object):
                     ping_interval=0, ping_timeout=None,
                     http_proxy_host=None, http_proxy_port=None,
                     http_no_proxy=None, http_proxy_auth=None,
+                    proxy_type='http',
                     skip_utf8_validation=False,
                     host=None, origin=None, dispatcher=None):
         """
@@ -186,6 +187,7 @@ class WebSocketApp(object):
         http_proxy_host: http proxy host name.
         http_proxy_port: http proxy port. If not set, set to 80.
         http_no_proxy: host names, which doesn't use proxy.
+        proxy_type: "http", "socks4", "socks5" or "socks5h".
         skip_utf8_validation: skip utf8 validation.
         host: update host header.
         origin: update origin header.
@@ -228,7 +230,7 @@ class WebSocketApp(object):
             self.sock.settimeout(getdefaulttimeout())
             self.sock.connect(
                 self.url, header=self.header, cookie=self.cookie,
-                http_proxy_host=http_proxy_host,
+                http_proxy_host=http_proxy_host, proxy_type=proxy_type,
                 http_proxy_port=http_proxy_port, http_no_proxy=http_no_proxy,
                 http_proxy_auth=http_proxy_auth, subprotocols=self.subprotocols,
                 host=host, origin=origin)
